@@ -41,34 +41,34 @@ exports.buildQueryReturnObj = (req)->
     rows:[]
   result
 
-exports.parseQueryString = (req)->
+exports.parseQueryString = (query)->
   query = {}
   query.limit = 10
-  if req.query.pageSize?
-    plimit = parseInt(req.query.pageSize)
+  if query.pageSize?
+    plimit = parseInt(query.pageSize)
     if this.is("Number", plimit) and plimit > 0
       query.limit = plimit
 
   query.skip = 0
-  if req.query.pageIndex?
-    pIndex = parseInt(req.query.pageIndex)
+  if query.pageIndex?
+    pIndex = parseInt(query.pageIndex)
     if this.is("Number", pIndex) and pIndex > 0
       query.skip = (pIndex - 1) * query.limit
 
-  if req.query.sortField?
+  if query.sortField?
     query.sort = []
     pSort = []
-    pSort.push req.query.sortField
-    sortDirection = if req.query.sort? and req.query.sort is "desc" then "desc" else "asc"
+    pSort.push query.sortField
+    sortDirection = if query.sort? and query.sort is "desc" then "desc" else "asc"
     pSort.push sortDirection
     query.sort.push pSort
 
   query.fields =
     _id: 0
 
-  if req.query.fields?
+  if query.fields?
     try
-      pFields = JSON.parse req.query.fields
+      pFields = JSON.parse query.fields
       if pFields.length > 0
 
         for f in pFields
@@ -77,7 +77,7 @@ exports.parseQueryString = (req)->
 
 
   query.filter = {}
-  for q, v of req.query
+  for q, v of query
     if q.indexOf("f_") is 0
       p = q.replace("f_", "")
       try
@@ -86,7 +86,7 @@ exports.parseQueryString = (req)->
         objF = v
       query.filter[p] = objF
 
-  req.queryOption = query
+  queryOption = query
 
 
 

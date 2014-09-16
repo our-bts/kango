@@ -2,7 +2,7 @@ dbFactory = require("../db/dbFactory").factory
 util = require("../common/util")
 
 exports.query = (req, res, next)->
-  util.parseQueryString(req)
+  req.queryOption = util.parseQueryString(req.query)
   dbFactory.getCollection req.cloudReq.db, req.cloudReq.collection, (error, col)->
     if error?
       next error
