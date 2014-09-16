@@ -86,7 +86,7 @@ exports.parseQueryString = (query)->
         objF = v
       query.filter[p] = objF
 
-  queryOption = query
+  query
 
 
 
