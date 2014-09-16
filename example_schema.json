@@ -1,0 +1,18 @@
+//Used for register schema
+{
+    "DB": "sample",
+    "Schema": "employee",
+    "IsRemove": false,
+    "Fields": [
+        {
+            "FieldName": "id",
+            "IsIndex": true,
+            "IsPrimaryKey": true
+        },
+        {
+            "FieldName": "EmployeeNumber",
+            "IsIndex": true,
+            "IsPrimaryKey": false
+        }
+    ]
+}

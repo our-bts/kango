@@ -1,0 +1,6 @@
+//Used for register database
+{
+    "DB": "sample",
+    "IsRemove": false,
+    "Status": "Active"
+}
