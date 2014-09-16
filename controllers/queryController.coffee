@@ -2,14 +2,14 @@ dbFactory = require("../db/dbFactory").factory
 util = require("../common/util")
 
 exports.query = (req, res, next)->
-  req.queryOption = util.parseQueryString(req.query)
+  queryOption = util.parseQueryString(req.query)
   dbFactory.getCollection req.cloudReq.db, req.cloudReq.collection, (error, col)->
     if error?
       next error
     else
-      query = req.queryOption.filter
-      result = util.buildQueryReturnObj(req)
-      col.find(query, req.queryOption).toArray (error, rows)->
+      query = queryOption.filter
+      result = util.buildQueryReturnObj(queryOption)
+      col.find(query, queryOption).toArray (error, rows)->
         if error?
           next error
         else
@@ -23,14 +23,14 @@ exports.query = (req, res, next)->
 
 
 exports.queryById = (req, res, next)->
-  req.queryOption = util.parseQueryString(req.query)
+  queryOption = util.parseQueryString(req.query)
   dbFactory.getCollection req.cloudReq.db, req.cloudReq.collection, (error, col)->
     if error?
       next error
     else
       query = util.getCriteriaForQueryId(req.cloudReq.data)
       option =
-        fields: req.queryOption.fields
+        fields: queryOption.fields
       col.findOne query, option, (error, row)->
         if error?
           next error

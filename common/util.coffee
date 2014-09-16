@@ -33,10 +33,10 @@ exports.getCriteriaForId = (data)->
     _id: data._id
   criteria
 
-exports.buildQueryReturnObj = (req)->
+exports.buildQueryReturnObj = (queryOption)->
   result =
-    pageSize: req.queryOption.limit
-    pageIndex: (req.queryOption.skip / req.queryOption.limit) + 1
+    pageSize: queryOption.limit
+    pageIndex: (queryOption.skip / queryOption.limit) + 1
     total_rows: 0
     rows:[]
   result
